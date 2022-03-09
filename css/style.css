@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	transition: all 500ms ease-in-out;
+	scroll-behavior: smooth;
+}
+html,
+body {
+	height: 100vh;
+	margin: 0;
+}
+body {
+	font-family: 'Manrope', sans-serif;
+}
+#app {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: hsl(218, 23%, 16%);
+  padding-left: 2em;
+  padding-right: 2em;
+	/* background-color: hsl(193, 38%, 86%); */
+}
+
+#advice_box {
+	max-width: 370px;
+	height: 60%;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* background-color: hsl(193, 38%, 86%); */
+	background-color: hsl(217, 19%, 24%);
+	/* background-color: hsl(217, 19%, 38%); */
+	/* background-color: hsl(150, 100%, 66%); */
+	border-radius: 2em;
+	padding: 1em;
+  margin-top: -7%;
+}
+h3 {
+	font-size: max(12.8px, 1em);
+	color: hsl(150, 100%, 66%);
+	letter-spacing: 0.2em;
+	height: 10%;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h3::selection,
+h3 > *::selection {
+	background-color: hsl(150, 100%, 66%);
+	color: hsl(217, 19%, 24%);
+}
+#adviceText {
+	color: hsl(193, 38%, 86%);
+	font-size: clamp(1em, 2em, 36px);
+	font-weight: 800;
+	text-align: center;
+  height: 70%;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#adviceText::selection {
+	background-color: hsl(193, 38%, 86%);
+	color: hsl(217, 19%, 24%);
+}
+#divider {
+  height: 10%;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button {
+	width: 6em;
+	height: 6em;
+	position: absolute;
+	bottom: -3em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	background-color: hsl(150, 100%, 66%);
+	outline: none;
+	border: none;
+}
+
+
+
+.attribution {
+  position: absolute;
+  inset: auto 0 4%;
+}
