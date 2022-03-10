@@ -21,7 +21,12 @@
       </p>
       <div id='divider'><img src="./images/pattern-divider-mobile.svg" alt="||"></div>
       <button
-        id='button'><img
+        id='button'
+        onmousedown="this.classList.add('button_clicked')"
+        onmouseup="this.classList.remove('button_clicked')"
+        ontouchstart="this.classList.add('button_clicked')"
+        ontouchend="this.classList.remove('button_clicked')"
+        ><img
           src="./images/icon-dice.svg"
           alt="New Advice"></button>
     </div>

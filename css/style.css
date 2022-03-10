@@ -107,6 +107,14 @@ button {
 	background-color: hsl(150, 100%, 66%);
 	outline: none;
 	border: none;
+	transition: transform 80ms linear;
+	transition: box-shadow 130ms linear;
+}
+button:hover {
+	box-shadow: 0 0 1.4em .8em hsla(150, 100%, 66%, 0.256);
+}
+.button_clicked {
+	transform: scale(.93);
 }
 
 
