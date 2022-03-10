@@ -61,7 +61,7 @@ h3 > *::selection {
 }
 #adviceText {
 	color: hsl(193, 38%, 86%);
-	font-size: clamp(1em, 2em, 36px);
+	font-size: clamp(1em, 1.9em, 36px);
 	font-weight: 800;
 	text-align: center;
   height: 70%;
@@ -72,6 +72,22 @@ h3 > *::selection {
 #adviceText::selection {
 	background-color: hsl(193, 38%, 86%);
 	color: hsl(217, 19%, 24%);
+}
+#loader {
+  height: 0;
+  width: 0;
+  padding: 25px;
+  border: 6px solid hsl(193, 38%, 86%);
+  border-right-color: hsl(218, 23%, 16%);
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+  -webkit-animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 #divider {
   height: 10%;
