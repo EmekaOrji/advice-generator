@@ -7,6 +7,3 @@ searchBar.addEventListener('focus', () => {
 searchBar.addEventListener('blur', () => {
 	searchBarBox.classList.remove('search-bar_active');
 });
-
-console.log(searchBar);
-console.log(searchBarBox);

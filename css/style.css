@@ -37,7 +37,7 @@ body {
 	background-color: transparent;
 	border: 2px solid hsl(217, 19%, 24%);
 	border-radius: 1em;
-	margin-bottom: 3em;
+	margin-bottom: 2em;
 	display: flex;
 }
 .search-bar_active {
@@ -50,6 +50,7 @@ body {
 	background-color: transparent;
 	border: none;
 	padding: 1em;
+	padding-right: 0;
 	outline: none;
 	border-radius: 1em 0 0 1em;
 	font-size: max(1.5em, 28px);
@@ -77,20 +78,48 @@ body {
 	color: hsl(193, 38%, 86%);
 }
 
-#advice_box {
-	max-width: 370px;
+.error_flag {
+	position: absolute;
+	top: -5%;
+	font-size: 1.5em;
+	padding: .5em;
+	border-radius: .5em;
+	background-color: #c03e3e80;
+	color: #ffffff90;
+	opacity: 0;
+	animation: error-display 6000ms ease;
+}
+@keyframes error-display {
+	20% {
+		opacity: 1;
+		top: 3%;
+	}
+	80% {
+		opacity: 1;
+		top: 3%;
+	}
+	100% {
+		opacity: 0;
+		top: -5%;
+	}
+}
+
+#adviceBox {
+	width: clamp(300px, 40%, 320px);
 	height: 60%;
 	min-height: 60vh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* background-color: hsl(193, 38%, 86%); */
 	background-color: hsl(217, 19%, 24%);
-	/* background-color: hsl(217, 19%, 38%); */
-	/* background-color: hsl(150, 100%, 66%); */
 	border-radius: 2em;
 	padding: 1em;
+}
+@media (max-height: 900px) and (max-width: 800px) {
+	#adviceBox {
+		min-height: 510px;
+	}
 }
 h3 {
 	font-size: max(12.8px, 1em);
@@ -106,21 +135,56 @@ h3 > *::selection {
 	background-color: hsl(150, 100%, 66%);
 	color: hsl(217, 19%, 24%);
 }
+#adviceId {
+	border: none;
+	outline: none;
+	border-radius: .4em;
+	display: inline;
+	background-color: transparent;
+	align-self: center;
+	color: inherit;
+	font-size: 1em;
+	font-weight: inherit;
+	white-space: nowrap;
+}
+#adviceId:focus {
+	background-color: hsl(193, 38%, 86%, .321);
+	padding: 0 .3em;
+}
+#adviceTextContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 70%;
+	width: 100%;
+}
 #adviceText {
 	color: hsl(193, 38%, 86%);
 	font-size: clamp(1em, 1.9em, 36px);
 	font-weight: 800;
 	text-align: center;
-  height: 70%;
-	display: flex;
-  justify-content: center;
-  align-items: center;
 }
 #adviceText::selection {
 	background-color: hsl(193, 38%, 86%);
 	color: hsl(217, 19%, 24%);
 }
-#loader {
+.highlight {
+	display: inline;
+	border-radius: .4em;
+	animation: highlight 4s ease-in-out;
+}
+@keyframes highlight {
+	0% {
+		background-color: hsl(193, 38%, 86%, .321);
+	}
+	80% {
+		background-color: hsl(193, 38%, 86%, .321);
+	}
+	100% {
+		background-color: transparent;
+	}
+}
+#loader, #loaderId {
   height: 0;
   width: 0;
   padding: 25px;
@@ -130,6 +194,12 @@ h3 > *::selection {
   animation: rotate 1s infinite linear;
   -webkit-animation: rotate 1s infinite linear;
 }
+#loaderId {
+	padding: 8px;
+	border: 6px solid hsl(150, 100%, 66%);
+	border-right-color: hsl(218, 23%, 16%);
+	border-width: 2.5px;
+}
 
 @keyframes rotate {
   100% {
@@ -137,16 +207,38 @@ h3 > *::selection {
   }
 }
 #divider {
-  height: 10%;
+	height: 10%;
+	width: 100%;
 	display: flex;
   justify-content: center;
   align-items: center;
 }
-#button {
+#divider > img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+
+
+
+.buttons {
+	width: 65%;
+	position: absolute;
+	bottom: -2.5em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: .4em;
+	background: linear-gradient(to bottom right, hsl(218, 23%, 16%) 50%, hsl(150, 100%, 66%) 290%);
+	border-radius: 4em;
+	transition: all 300ms ease-in-out;
+}
+.new_button {
 	width: 6em;
 	height: 6em;
-	position: absolute;
-	bottom: -3em;
+	width: 5em;
+	height: 5em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -154,7 +246,55 @@ h3 > *::selection {
 	background-color: hsl(150, 100%, 66%);
 	outline: none;
 	border: none;
+	transition: transform 80ms linear;
+	transition: box-shadow 130ms linear;
 }
+.new_button:hover {
+	box-shadow: 0 0 1.4em .8em hsla(150, 100%, 66%, 0.256);
+}
+.arrow_buttons {
+	width: fit-content;
+	display: flex;
+	justify-content: space-between;
+	gap: 5px;
+	transition: all 300ms ease-in-out;
+	overflow: hidden;
+	color:hsl(193, 38%, 86%)
+}
+.arrow_buttons svg {
+	width: 100%;
+}
+.arrow_button {
+	width: 4.3em;
+	height: 4.3em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	background-color: hsl(150, 100%, 66%);
+	background-color: transparent;
+	outline: none;
+	border: none;
+	padding: 1.8em;
+	color: hsl(193, 38%, 86%);
+	transition: all 200ms ease-in-out;
+	transition: transform 20ms linear;
+}
+.arrow_button:hover {
+	background-color: #ffffff09;
+	backdrop-filter: blur(10px);
+}
+.hide_buttons {
+	width: 5em;
+	background: transparent;
+}
+.hide_buttons .arrow_buttons {
+	width: 0%;
+}
+.button_clicked {
+	transform: scale(.93);
+}
+
 
 
 
