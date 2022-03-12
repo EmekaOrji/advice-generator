@@ -19,7 +19,6 @@ function highlightText() {
 	if (searched !== '') {
 		let text = adviceBox.innerHTML;
 		let reg = new RegExp(searched, 'gi'); // search for all instances
-		console.log(reg);
 		let newText = text.replace(reg, (match) => `<span class="highlight">${match}</span>`);
 		adviceBox.innerHTML = newText;
 	}
@@ -36,10 +35,8 @@ async function generateRandomAdvice() {
 			adviceId.innerHTML = rawAdvice.slip.id;
 			adviceBox.innerHTML = rawAdvice.slip.advice;
 		}
-		console.log(rawAdvice);
 		return response;
 	} catch (error) {
-		console.log(error);
 	}
 }
 
@@ -51,7 +48,6 @@ async function generateAdviceBySearch(searchQuery) {
 			displayLoader();
 			let response = await fetch(url);
 			let rawAdvice = await response.json();
-			console.log(rawAdvice);
 			if (rawAdvice.message && rawAdvice.message.text === 'No advice slips found matching that search term.') {
 				adviceId.innerHTML = 0;
 				adviceBox.innerHTML = '';
@@ -66,8 +62,6 @@ async function generateAdviceBySearch(searchQuery) {
 			}
 			let adviceArray = rawAdvice.slips;
 			let adviceAmount = rawAdvice.total_results;
-			console.log(adviceArray);
-			console.log(adviceAmount);
 			if (response) {
 				let index = 0;
 				renderSlip(index, adviceArray);
@@ -93,10 +87,7 @@ async function generateAdviceBySearch(searchQuery) {
 				});
 			}
 			rawAdvice = null;
-			console.log(rawAdvice);
 		} catch (error) {
-			console.log(error.message);
-			console.log(error.name);
 		}
 		function renderSlip(index, adviceArray) {
 			adviceId.innerHTML = adviceArray[index].id;
@@ -113,7 +104,6 @@ async function generateAdviceById(id) {
 			displayLoader();
 			let response = await fetch(url);
 			let rawAdvice = await response.json();
-			console.log(rawAdvice);
 			if (rawAdvice.message && rawAdvice.message.text === 'No advice slips found matching that id') {
 				adviceId.innerHTML = 0;
 				adviceBox.innerHTML = '';
@@ -131,24 +121,18 @@ async function generateAdviceById(id) {
 				adviceBox.innerHTML = rawAdvice.slip.advice;
 			}
 			rawAdvice = null;
-			console.log(rawAdvice);
 		} catch (error) {
-			console.log(error.message);
-			console.log(error.name);
 		}
 	}
 }
 
 function handleSearch() {
 	const searchQuery = searchInput.value;
-	console.log(searchQuery);
 	if (!searchQuery) {
 		buttons.classList.add('hide_buttons');
 		if (!generateRandomAdvice()) {
 			generateRandomAdvice();
-			console.log('There is no response');
 		}
-		console.log('Type in something');
 		return;
 	}
 	generateAdviceBySearch(searchQuery);
