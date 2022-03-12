@@ -150,10 +150,12 @@ function handleSearch() {
 
 function init() {
 	generateRandomAdvice();
+	const previousSearchOccurence = document.querySelector('.search_occurence');
 	button.addEventListener('click', () => {
 		searchInput.value = '';
 		buttons.classList.add('hide_buttons');
 		generateRandomAdvice();
+		previousSearchOccurence.remove();
 	});
 }
 
