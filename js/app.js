@@ -150,8 +150,8 @@ function handleSearch() {
 
 function init() {
 	generateRandomAdvice();
-	const previousSearchOccurence = document.querySelector('.search_occurence');
 	button.addEventListener('click', () => {
+		const previousSearchOccurence = document.querySelector('.search_occurence');
 		searchInput.value = '';
 		buttons.classList.add('hide_buttons');
 		generateRandomAdvice();
