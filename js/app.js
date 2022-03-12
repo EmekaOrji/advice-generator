@@ -42,6 +42,10 @@ async function generateRandomAdvice() {
 
 async function generateAdviceBySearch(searchQuery) {
 	localStorage.clear();
+	const previousSearchOccurence = document.querySelector('.search_occurence');
+	if (previousSearchOccurence) {
+		previousSearchOccurence.remove();
+	}
 	if (searchQuery) {
 		const url = `https://api.adviceslip.com/advice/search/${searchQuery}`;
 		try {
@@ -66,7 +70,12 @@ async function generateAdviceBySearch(searchQuery) {
 				let index = 0;
 				renderSlip(index, adviceArray);
 				highlightText();
+				const searchOccurence = document.createElement('div');
+				searchOccurence.innerHTML = `'${searchQuery}' occurs in ${adviceAmount} advices`;
+				searchOccurence.classList.add('search_occurence');
+				app.prepend(searchOccurence);
 				if (adviceAmount === '1') {
+					searchOccurence.innerHTML = `'${searchQuery}' occurs in ${adviceAmount} advice`;
 					buttons.classList.add('hide_buttons');
 					return;
 				}
@@ -87,8 +96,7 @@ async function generateAdviceBySearch(searchQuery) {
 				});
 			}
 			rawAdvice = null;
-		} catch (error) {
-		}
+		} catch (error) {}
 		function renderSlip(index, adviceArray) {
 			adviceId.innerHTML = adviceArray[index].id;
 			adviceBox.innerHTML = adviceArray[index].advice;
@@ -98,6 +106,7 @@ async function generateAdviceBySearch(searchQuery) {
 
 async function generateAdviceById(id) {
 	localStorage.clear();
+	document.getElementById('adviceId').classList.remove('advice_id');
 	if (id) {
 		const url = `https://api.adviceslip.com/advice/${id}`;
 		try {
@@ -121,15 +130,16 @@ async function generateAdviceById(id) {
 				adviceBox.innerHTML = rawAdvice.slip.advice;
 			}
 			rawAdvice = null;
-		} catch (error) {
-		}
+		} catch (error) {}
 	}
 }
 
 function handleSearch() {
 	const searchQuery = searchInput.value;
+	const previousSearchOccurence = document.querySelector('.search_occurence');
 	if (!searchQuery) {
 		buttons.classList.add('hide_buttons');
+		previousSearchOccurence.remove();
 		if (!generateRandomAdvice()) {
 			generateRandomAdvice();
 		}
